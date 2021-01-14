@@ -1,13 +1,7 @@
 # ZIP Weather
 
-### Resources
+## A concise weather app
 
-[UIKit](https://getuikit.com/)
+> Check it out: [Demo](https://bbaskett-zip-weather.netlify.app/)
 
-[ExpressJs](http://expressjs.com/)
-
-[Svelte](https://svelte.dev/)
-
-### DEV STUFF [DELETE]
-
-[Blog](https://blog.logrocket.com/consuming-rest-apis-in-svelte/)
+Weather data provided by [Open Weather API](https://openweathermap.org/)

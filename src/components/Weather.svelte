@@ -4,13 +4,24 @@
     weather: {
       [0]: { main, description, icon },
     },
-    main: { temp_min, temp, temp_max },
+    main: { temp_min, temp, temp_max, feels_like, pressure, humidity },
     wind,
     clouds,
-    dt,
+    visibility,
     sys,
     name,
   } = $WEATHER;
+
+  function compass(degrees) {
+    if (degrees > 0 && degrees < 45) return "N";
+    if (degrees > 45 && degrees < 90) return "NE";
+    if (degrees > 90 && degrees < 135) return "E";
+    if (degrees > 135 && degrees < 180) return "SE";
+    if (degrees > 180 && degrees < 225) return "S";
+    if (degrees > 225 && degrees < 270) return "SW";
+    if (degrees > 270 && degrees < 305) return "W";
+    if (degrees > 305 && degrees < 360) return "NW";
+  }
 </script>
 
 <style type="text/scss">
@@ -23,6 +34,10 @@
     footer {
       margin: 0.5em;
     }
+    header {
+      display: flex;
+      justify-content: space-between;
+    }
     main {
       flex: 2 1 auto;
     }
@@ -31,14 +46,17 @@
 
 <div id="weather-wrapper">
   <header>
-    <p class="uk-text-small uk-text-light">
-      Weather for
+    <span class="uk-text-small uk-text-light">
+      <a href="/" class="uk-link-text">&leftarrow;&nbsp;back</a>
+    </span>
+    <span class="uk-text-small uk-text-light">
+      weather for
       <a
         class="uk-link-text"
         href="https://www.unitedstateszipcodes.org/{$ZIPCODE}"
         target="_blank"
         rel="noreferrer noopener">{$ZIPCODE}</a>
-    </p>
+    </span>
   </header>
   <main class="uk-container">
     <div class="uk-position-center uk-text-center">
@@ -52,19 +70,24 @@
         uk-img />
       <p class="uk-text-large">{Math.round(temp)}</p>
       <button
-        class="uk-button uk-button-default"
+        class="uk-button uk-button-primary"
         type="button"
-        uk-toggle="target: #offcanvas-overlay">More Info</button>
+        uk-toggle="target: #offcanvas-overlay">more info</button>
     </div>
   </main>
   <footer class="uk-text-center">
     <p class="uk-text-small uk-text-light">
-      Weather data provided by
-      <a class="uk-link-text" href="https://openweathermap.org/">OpenWeather API</a>
+      weather data provided by
+      <a
+        class="uk-link-text"
+        href="https://openweathermap.org/"
+        target="_blank"
+        rel="noreferrer noopener">openweather api</a>
     </p>
   </footer>
 </div>
 
+<!-- Overlay -->
 <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
   <div class="uk-offcanvas-bar">
     <button class="uk-offcanvas-close" type="button" uk-close />
@@ -96,22 +119,50 @@
           <th>Maximum</th>
           <td>{temp_max}&nbsp;&deg;F</td>
         </tr>
+        <tr>
+          <th>Feels Like</th>
+          <td>{feels_like}&nbsp;&deg;F</td>
+        </tr>
       </tbody>
     </table>
     <h4>Wind</h4>
     <table class="uk-table uk-table-small">
       <tbody>
         <tr>
-          <th>Minimum</th>
-          <td>{temp_min}&nbsp;&deg;F</td>
+          <th>Speed</th>
+          <td>{wind.speed}&nbsp;mph</td>
         </tr>
         <tr>
-          <th>Current</th>
-          <td>{temp}&nbsp;&deg;F</td>
+          <th>Direction</th>
+          <td>{compass(wind.deg)}</td>
+        </tr>
+        {#if wind.gust}
+          <tr>
+            <th>Gust</th>
+            <td>{wind.gust}&nbsp;mph</td>
+          </tr>
+        {/if}
+      </tbody>
+    </table>
+    <h4>Atmospheric</h4>
+    <table class="uk-table uk-table-small">
+      <tbody>
+        <tr>
+          <th>Humidity</th>
+          <td>{humidity}%</td>
         </tr>
         <tr>
-          <th>Maximum</th>
-          <td>{temp_max}&nbsp;&deg;F</td>
+          <th>Pressure</th>
+          <td>{pressure}&nbsp;hPa</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4>Visibility</h4>
+    <table class="uk-table uk-table-small">
+      <tbody>
+        <tr>
+          <th>Distance</th>
+          <td>{visibility}&nbsp;m</td>
         </tr>
       </tbody>
     </table>
@@ -119,16 +170,8 @@
     <table class="uk-table uk-table-small">
       <tbody>
         <tr>
-          <th>Minimum</th>
-          <td>{temp_min}&nbsp;&deg;F</td>
-        </tr>
-        <tr>
-          <th>Current</th>
-          <td>{temp}&nbsp;&deg;F</td>
-        </tr>
-        <tr>
-          <th>Maximum</th>
-          <td>{temp_max}&nbsp;&deg;F</td>
+          <th>Coverage</th>
+          <td>{clouds.all}%</td>
         </tr>
       </tbody>
     </table>
