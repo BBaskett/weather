@@ -1,5 +1,6 @@
 <script lang="ts">
   import { WEATHER, ZIPCODE } from "../stores";
+  import { fade } from "svelte/transition";
   const {
     weather: {
       [0]: { main, description, icon },
@@ -24,12 +25,12 @@
   }
 </script>
 
-<div id="weather-wrapper">
+<div id="weather-wrapper" transition:fade>
   <header>
     <span class="uk-text-small uk-text-light">
       <a href="/" class="uk-link-text">&leftarrow;&nbsp;back</a>
     </span>
-    <span class="uk-text-small uk-text-light">
+    <span class="uk-text-small uk-text-light ">
       weather for
       <a
         class="uk-link-text"
@@ -45,10 +46,9 @@
       <p class="uk-text-medium">{main}</p>
       <img
         data-src="http://openweathermap.org/img/wn/{icon}@4x.png"
-        width=""
-        height=""
-        alt=""
+        alt="weather-img"
         uk-img
+        transition:fade
       />
       <p class="uk-text-large">{Math.round(temp)}</p>
       <button
@@ -59,7 +59,7 @@
     </div>
   </main>
   <footer class="uk-text-center">
-    <p class="uk-text-small uk-text-light">
+    <p class="uk-text-small uk-text-light" style="color:white">
       weather data provided by
       <a
         class="uk-link-text"
@@ -93,19 +93,19 @@
       <tbody>
         <tr>
           <th>Minimum</th>
-          <td>{temp_min}&nbsp;&deg;F</td>
+          <td>{Math.round(temp_min)}&nbsp;&deg;F</td>
         </tr>
         <tr>
           <th>Current</th>
-          <td>{temp}&nbsp;&deg;F</td>
+          <td>{Math.round(temp)}&nbsp;&deg;F</td>
         </tr>
         <tr>
           <th>Maximum</th>
-          <td>{temp_max}&nbsp;&deg;F</td>
+          <td>{Math.round(temp_max)}&nbsp;&deg;F</td>
         </tr>
         <tr>
           <th>Feels Like</th>
-          <td>{feels_like}&nbsp;&deg;F</td>
+          <td>{Math.round(feels_like)}&nbsp;&deg;F</td>
         </tr>
       </tbody>
     </table>
@@ -114,7 +114,7 @@
       <tbody>
         <tr>
           <th>Speed</th>
-          <td>{wind.speed}&nbsp;mph</td>
+          <td>{Math.round(wind.speed)}&nbsp;mph</td>
         </tr>
         {#if wind.deg}
           <tr>
@@ -193,6 +193,14 @@
     }
     main {
       flex: 2 1 auto;
+    }
+  }
+
+  .uk-offcanvas-bar {
+    background: #fff;
+    color: #3b3b3b !important;
+    * {
+      color: #000 !important;
     }
   }
 </style>

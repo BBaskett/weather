@@ -22,7 +22,7 @@
   }
 </script>
 
-<div class="uk-position-center">
+<div class="uk-position-center" id="wrapper">
   <div class="uk-text-center">
     <img
       data-src="/images/zipper.svg"
@@ -34,17 +34,19 @@
   </div>
   <header class="uk-text-center uk-margin-medium">
     <h1 class="uk-margin-small-bottom">zip weather</h1>
-    <h6 class="uk-margin-remove">
-      <span class="uk-text-small uk-text-muted">weather in a zip</span>
-    </h6>
+    <h2 class="uk-margin-remove uk-text-small uk-text-muted">
+      weather in a zip
+    </h2>
   </header>
 
   <form on:submit|preventDefault>
     <div class="uk-inline">
       <span class="uk-form-icon" uk-icon="icon: location" />
+      <label for="zipcode_input" />
       <input
         type="text"
-        class="uk-input"
+        class="uk-input uk-text-center"
+        name="zipcode_input"
         placeholder="zip code"
         maxlength="5"
         pattern="[0-9]{'{'}4,5{'}'}"
@@ -76,6 +78,9 @@
     display: flex;
     @media only screen and (max-width: 400px) {
       flex-direction: column;
+    }
+    input {
+      padding-right: 40px;
     }
   }
 </style>
