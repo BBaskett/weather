@@ -2,10 +2,6 @@
   import { WEATHER, ZIPCODE } from "../stores";
 
   async function getWeather() {
-    // Check for cached call
-    if (window.localStorage.getItem($ZIPCODE)) {
-      return ($WEATHER = JSON.parse(window.localStorage.getItem($ZIPCODE)));
-    }
     try {
       const res = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?zip=${$ZIPCODE}&appid=0ea7fe29dac4eeced7fadd06e999190e&units=imperial`
@@ -14,8 +10,6 @@
       if (json.cod !== 200) {
         throw `Error: ${json.message}`;
       }
-      // Cache new calls
-      window.localStorage.setItem($ZIPCODE, JSON.stringify(json));
       return ($WEATHER = json);
     } catch (e) {
       return UIkit.notification({
