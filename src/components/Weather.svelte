@@ -24,26 +24,6 @@
   }
 </script>
 
-<style type="text/scss">
-  #weather-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    header,
-    footer {
-      margin: 0.5em;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-    }
-    main {
-      flex: 2 1 auto;
-    }
-  }
-</style>
-
 <div id="weather-wrapper">
   <header>
     <span class="uk-text-small uk-text-light">
@@ -55,7 +35,8 @@
         class="uk-link-text"
         href="https://www.unitedstateszipcodes.org/{$ZIPCODE}"
         target="_blank"
-        rel="noreferrer noopener">{$ZIPCODE}</a>
+        rel="noreferrer noopener">{$ZIPCODE}</a
+      >
     </span>
   </header>
   <main class="uk-container">
@@ -67,12 +48,14 @@
         width=""
         height=""
         alt=""
-        uk-img />
+        uk-img
+      />
       <p class="uk-text-large">{Math.round(temp)}</p>
       <button
         class="uk-button uk-button-primary"
         type="button"
-        uk-toggle="target: #offcanvas-overlay">more info</button>
+        uk-toggle="target: #offcanvas-overlay">more info</button
+      >
     </div>
   </main>
   <footer class="uk-text-center">
@@ -82,7 +65,8 @@
         class="uk-link-text"
         href="https://openweathermap.org/"
         target="_blank"
-        rel="noreferrer noopener">openweather api</a>
+        rel="noreferrer noopener">openweather api</a
+      >
     </p>
   </footer>
 </div>
@@ -132,10 +116,12 @@
           <th>Speed</th>
           <td>{wind.speed}&nbsp;mph</td>
         </tr>
-        <tr>
-          <th>Direction</th>
-          <td>{compass(wind.deg)}</td>
-        </tr>
+        {#if wind.deg}
+          <tr>
+            <th>Direction</th>
+            <td>{compass(wind.deg)}</td>
+          </tr>
+        {/if}
         {#if wind.gust}
           <tr>
             <th>Gust</th>
@@ -190,3 +176,23 @@
     </table>
   </div>
 </div>
+
+<style type="text/scss">
+  #weather-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    header,
+    footer {
+      margin: 0.5em;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+    }
+    main {
+      flex: 2 1 auto;
+    }
+  }
+</style>
