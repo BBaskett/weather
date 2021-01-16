@@ -25,10 +25,10 @@
 <div class="uk-position-center" id="wrapper">
   <div class="uk-text-center">
     <img
-      data-src="/images/zipper.svg"
+      data-src="/images/zip.svg"
       height="128"
       width="128"
-      alt="zipper"
+      alt="zip_logo"
       uk-img
     />
   </div>
@@ -68,7 +68,7 @@
     <a
       href="https://tools.usps.com/go/ZipLookupAction"
       target="_blank"
-      rel="noreferrer noopener">what's a zip code?</a
+      rel="noreferrer noopener">find my zip code</a
     >
   </p>
 </div>
