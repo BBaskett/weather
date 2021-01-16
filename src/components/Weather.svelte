@@ -52,7 +52,7 @@
       />
       <p class="uk-text-large">{Math.round(temp)}</p>
       <button
-        class="uk-button uk-button-default uk-text-lowercase"
+        class="uk-button uk-button-default uk-text-lowercase uk-background-default"
         type="button"
         uk-toggle="target: #offcanvas-overlay">more info</button
       >

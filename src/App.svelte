@@ -2,7 +2,7 @@
   import { WEATHER } from "./stores";
   import Form from "./components/Form.svelte";
   import Weather from "./components/Weather.svelte";
-  /* $WEATHER = {
+  $WEATHER = {
     coord: { lon: -74.0469, lat: 40.7221 },
     weather: [
       { id: 804, main: "Clouds", description: "overcast clouds", icon: "04n" },
@@ -31,7 +31,7 @@
     id: 0,
     name: "Jersey City",
     cod: 200,
-  }; */
+  };
 </script>
 
 {#if $WEATHER}
