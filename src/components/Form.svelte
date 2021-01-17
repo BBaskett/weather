@@ -2,18 +2,13 @@
   import { WEATHER, ZIPCODE } from "../stores";
 
   async function getWeather() {
-    try {
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?zip=${$ZIPCODE}&appid=0ea7fe29dac4eeced7fadd06e999190e&units=imperial`
-      );
-      const json = await res.json();
-      if (json.cod !== 200) {
-        throw `Error: ${json.message}`;
-      }
+    const response = await fetch(`/api/currentWeather?zipcode=${$ZIPCODE}`);
+    const json = await response.json();
+    if (response.status === 200) {
       return ($WEATHER = json);
-    } catch (e) {
+    } else {
       return UIkit.notification({
-        message: e,
+        message: json,
         status: "danger",
         pos: "top-center",
         timeout: 5000,
