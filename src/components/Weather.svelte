@@ -12,6 +12,9 @@
     sys,
     name,
   } = $WEATHER;
+  const temperature =
+    $UNITS === "imperial" ? "F" : $UNITS === "metric" ? "C" : "K";
+  const speed = $UNITS === "imperial" ? "mph" : "m/s";
 
   function compass(degrees) {
     if (degrees > 0 && degrees < 45) return "N";
@@ -99,19 +102,19 @@
       <tbody>
         <tr>
           <th>Minimum</th>
-          <td>{Math.round(temp_min)}&nbsp;&deg;F</td>
+          <td>{Math.round(temp_min)}&nbsp;&deg;{temperature}</td>
         </tr>
         <tr>
           <th>Current</th>
-          <td>{Math.round(temp)}&nbsp;&deg;F</td>
+          <td>{Math.round(temp)}&nbsp;&deg;{temperature}</td>
         </tr>
         <tr>
           <th>Maximum</th>
-          <td>{Math.round(temp_max)}&nbsp;&deg;F</td>
+          <td>{Math.round(temp_max)}&nbsp;&deg;{temperature}</td>
         </tr>
         <tr>
           <th>Feels Like</th>
-          <td>{Math.round(feels_like)}&nbsp;&deg;F</td>
+          <td>{Math.round(feels_like)}&nbsp;&deg;{temperature}</td>
         </tr>
       </tbody>
     </table>
@@ -120,7 +123,7 @@
       <tbody>
         <tr>
           <th>Speed</th>
-          <td>{Math.round(wind.speed)}&nbsp;mph</td>
+          <td>{Math.round(wind.speed)}&nbsp;{speed}</td>
         </tr>
         {#if wind.deg}
           <tr>
@@ -131,7 +134,7 @@
         {#if wind.gust}
           <tr>
             <th>Gust</th>
-            <td>{wind.gust}&nbsp;mph</td>
+            <td>{wind.gust}&nbsp;{speed}</td>
           </tr>
         {/if}
       </tbody>
