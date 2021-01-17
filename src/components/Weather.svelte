@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { WEATHER, ZIPCODE } from "../stores";
+  import { UNITS, WEATHER, ZIPCODE } from "../stores";
   import { fade } from "svelte/transition";
   const {
     weather: {
@@ -50,7 +50,13 @@
         uk-img
         transition:fade
       />
-      <p class="uk-text-large">{Math.round(temp)}</p>
+      <p class="uk-text-large">
+        {Math.round(temp)}&nbsp;{$UNITS === "imperial"
+          ? "F"
+          : $UNITS === "metric"
+          ? "C"
+          : "K"}
+      </p>
       <button
         class="uk-button uk-button-default uk-text-lowercase uk-background-default"
         type="button"
@@ -58,8 +64,8 @@
       >
     </div>
   </main>
-  <footer class="uk-text-center">
-    <p class="uk-text-small uk-text-light" style="color:white">
+  <footer class="uk-text-center uk-margin-remove">
+    <span class="uk-text-small">
       weather data provided by
       <a
         class="uk-link-text"
@@ -67,7 +73,7 @@
         target="_blank"
         rel="noreferrer noopener">openweather api</a
       >
-    </p>
+    </span>
   </footer>
 </div>
 
@@ -193,6 +199,11 @@
     }
     main {
       flex: 2 1 auto;
+    }
+    footer {
+      padding: 8px;
+      background-color: rgba(255, 255, 255, 0.25);
+      color: white;
     }
   }
 

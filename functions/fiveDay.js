@@ -7,7 +7,7 @@ exports.handler = async function (event, context) {
   const units = params.units;
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&appid=${key}&units=${units}`
+      `https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode}&appid=${key}&units=${units}`
     );
     const json = await response.json();
     if (response.status !== 200) {
