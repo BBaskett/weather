@@ -2,7 +2,9 @@
   import { WEATHER, ZIPCODE } from "../stores";
 
   async function getWeather() {
-    const response = await fetch(`/api/currentWeather?zipcode=${$ZIPCODE}`);
+    const response = await fetch(
+      `/.netlify/functions/currentWeather?zipcode=${$ZIPCODE}`
+    );
     const json = await response.json();
     if (response.status === 200) {
       return ($WEATHER = json);
